@@ -7,7 +7,24 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import DashboardTemplate from './components/Dashboard.vue';
+import ProfileTemplate from './components/Profile.vue';
+
+Vue.use(VueRouter)
+
+const Dashboard = { template: DashboardTemplate }
+const Profile = { template: ProfileTemplate }
+
+let routes = [
+    { path: '/dashboard', component: DashboardTemplate },
+    { path: '/profile', component: ProfileTemplate }
+]
+
+const router = new VueRouter({
+    routes // short for `routes: routes`
+}) 
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,5 +46,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
 });
