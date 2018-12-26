@@ -142,6 +142,7 @@
 
 <script>
 import Form from "vform";
+//import Swl from "sweetalert2";
 
 export default {
   data() {
@@ -163,9 +164,16 @@ export default {
     },
 
     createUser() {
-      this.$progress.start();
+      this.$Progress.start();
       this.form.post("api/user");
-      this.$progress.finish();
+
+      $("#addNew").modal("hide");
+
+      toast({
+        type: "success",
+        title: "User created successfully"
+      });
+      this.$Progress.finish();
     }
   },
   mounted() {
