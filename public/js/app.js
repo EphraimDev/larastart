@@ -40772,19 +40772,39 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c(
-                          "Select",
+                          "select",
                           {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.type,
+                                expression: "form.type"
+                              }
+                            ],
                             staticClass: "form-control",
                             class: {
                               "is-invalid": _vm.form.errors.has("type")
                             },
                             attrs: { id: "type", name: "type" },
-                            model: {
-                              value: _vm.form.type,
-                              callback: function($$v) {
-                                _vm.$set(_vm.form, "type", $$v)
-                              },
-                              expression: "form.type"
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
                             }
                           },
                           [

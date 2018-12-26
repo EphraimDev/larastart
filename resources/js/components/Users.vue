@@ -102,7 +102,7 @@
                 <has-error :form="form" field="bro"></has-error>
               </div>
               <div class="form-group">
-                <Select
+                <select
                   v-model="form.type"
                   id="type"
                   name="type"
@@ -113,7 +113,7 @@
                   <option value="admin">Admin</option>
                   <option value="user">Standard User</option>
                   <option value="author">Author</option>
-                </Select>
+                </select>
                 <has-error :form="form" field="type"></has-error>
               </div>
               <div class="form-group">
