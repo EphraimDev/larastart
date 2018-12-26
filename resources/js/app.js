@@ -8,6 +8,12 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+import { Form, HasError, AlertError } from 'vform';
+
+//window.form = Form
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 import VueRouter from 'vue-router';
 import DashboardTemplate from './components/Dashboard.vue';
 import ProfileTemplate from './components/Profile.vue';
@@ -25,7 +31,7 @@ let routes = [
 const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
-}) 
+})
 
 /**
  * The following block of code may be used to automatically register your
