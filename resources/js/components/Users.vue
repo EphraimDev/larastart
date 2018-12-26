@@ -165,8 +165,9 @@ export default {
 
     createUser() {
       this.$Progress.start();
-      this.form.post("api/user");
-    Fire.$emit('AfterCreate')
+      this.form.post("api/user")
+      .then(()=> {
+        Fire.$emit('AfterCreate')
       $("#addNew").modal("hide");
 
       toast({
@@ -174,6 +175,11 @@ export default {
         title: "User created successfully"
       });
       this.$Progress.finish();
+      })
+      .catch(()=>{
+        
+      });
+      
     }
   },
   created() {
