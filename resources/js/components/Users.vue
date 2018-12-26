@@ -163,7 +163,9 @@ export default {
     },
 
     createUser() {
+      this.$progress.start();
       this.form.post("api/user");
+      this.$progress.finish();
     }
   },
   mounted() {

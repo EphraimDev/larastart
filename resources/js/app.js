@@ -9,6 +9,7 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import moment from 'moment';
+import VueProgressBar from 'vue-progressbar';
 import { Form, HasError, AlertError } from 'vform';
 
 //window.form = Form
@@ -21,6 +22,22 @@ import ProfileTemplate from './components/Profile.vue';
 import UsersTemplate from './components/Users.vue';
 
 Vue.use(VueRouter)
+
+const options = {
+    color: '#bffaf3',
+    failedColor: '#874b4b',
+    thickness: '5px',
+    transition: {
+      speed: '0.2s',
+      opacity: '0.6s',
+      termination: 300
+    },
+    autoRevert: true,
+    location: 'left',
+    inverse: false
+}
+
+Vue.use(VueProgressBar, options)
 
 
 let routes = [
