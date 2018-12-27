@@ -4,6 +4,10 @@
   background-size: cover;
   height: 250px !important;
 }
+
+.profile-picture{
+    border: 0 !important;
+}
 </style>
 
 
@@ -206,14 +210,26 @@
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      <input
+                        type="text"
+                        v-model="form.name"
+                        class="form-control"
+                        id="inputName"
+                        placeholder="Name"
+                      >
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <input
+                        type="email"
+                        v-model="form.email"
+                        class="form-control"
+                        id="inputEmail"
+                        placeholder="Email"
+                      >
                     </div>
                   </div>
                   <div class="form-group">
@@ -227,7 +243,7 @@
                     <label for="inputProfilePhoto" class="col-sm-6 control-label">Profile Photo</label>
 
                     <div class="col-sm-10">
-                      <input type="file" class="form-control" id="inputPhoto">
+                      <input type="file" class="form-control profile-picture" id="inputPhoto">
                     </div>
                   </div>
                   <div class="form-group">
@@ -266,8 +282,23 @@
 
 <script>
 export default {
-  mounted() {
-    console.log("Component mounted.");
+  data() {
+    return {
+      form: new Form({
+        id: "",
+        name: "",
+        email: "",
+        password: "",
+        type: "",
+        bio: "",
+        photo: ""
+      })
+    };
+  },
+  created() {
+    axios.get("api/profile").then(({ data }) => {
+      this.form.fill(data);
+    });
   }
 };
 </script>

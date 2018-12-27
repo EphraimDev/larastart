@@ -25,7 +25,7 @@ const toast = Swal.mixin({
 
 window.toast = toast
 
-//window.form = Form
+window.Form = Form
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 

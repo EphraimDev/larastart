@@ -45,12 +45,23 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
+        $photo = $request->photo;
+        $type = $request->type;
+
+
+        if ($photo === null) {
+            $photo = 'profile.png';
+        }
+        if ($type === null) {
+            $type = 'user';
+        }
+
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'type' => $request['type'],
+            'type' => $type,
             'bio' => $request['bio'],
-            'photo' => $request['photo'],
+            'photo' => $photo,
             'password' => Hash::make($request['password'])
         ]);
     }
@@ -64,6 +75,17 @@ class UserController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Display the user profile.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        return auth('api')->user();
     }
 
     /**
