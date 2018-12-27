@@ -33,6 +33,7 @@ import VueRouter from 'vue-router';
 import DashboardTemplate from './components/Dashboard.vue';
 import ProfileTemplate from './components/Profile.vue';
 import UsersTemplate from './components/Users.vue';
+import DeveloperTemplate from './components/Developer.vue';
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,7 @@ Vue.use(VueProgressBar, options)
 
 let routes = [
     { path: '/dashboard', component: DashboardTemplate },
+    { path: '/developer', component: DeveloperTemplate },
     { path: '/users', component: UsersTemplate },
     { path: '/profile', component: ProfileTemplate }
 ]
@@ -73,6 +75,21 @@ Vue.filter('myDate', (created) => {
 })
 
 window.Fire = new Vue();
+
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
 
 /**
  * The following block of code may be used to automatically register your
