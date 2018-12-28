@@ -2221,11 +2221,25 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$Progress.start();
-      this.form.put("api/profile/").then(function () {
-        _this3.$Progress.finish();
-      }).catch(function () {
-        _this3.$Progress.fail();
-      });
+
+      if (this.form.password == "") {
+        axios.get("api/profile").then(function (_ref2) {
+          var data = _ref2.data;
+          _this3.form.password = data.password;
+        }).then(function () {
+          _this3.form.put("api/profile/").then(function () {
+            _this3.$Progress.finish();
+          }).catch(function () {
+            _this3.$Progress.fail();
+          });
+        });
+      } else {
+        this.form.put("api/profile/").then(function () {
+          _this3.$Progress.finish();
+        }).catch(function () {
+          _this3.$Progress.fail();
+        });
+      }
     }
   }
 });

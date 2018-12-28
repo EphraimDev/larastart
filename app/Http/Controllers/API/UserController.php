@@ -102,7 +102,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
-            'password' => 'sometimes|min:6'
+            'password' => 'sometimes|required|min:6'
         ]);
 
         $photo = $request->photo;
@@ -112,6 +112,12 @@ class UserController extends Controller
             $name = time() . '.' . explode('/', explode(':', substr($photo, 0, strpos($photo, ';')))[1])[1];
             \Image::make($photo)->save(public_path('img/profile/') . $name);
             $request->merge(['photo' => $name]);
+
+
+            $userPhoto = public_path('img/profile/') . $currentPhoto;
+            if (file_exists($userPhoto)) {
+                @unlink($userPhoto);
+            }
         }
 
         if (!empty($request->password)) {

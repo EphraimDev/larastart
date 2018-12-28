@@ -336,14 +336,32 @@ export default {
     },
     updateInfo() {
       this.$Progress.start();
-      this.form
-        .put("api/profile/")
-        .then(() => {
-          this.$Progress.finish();
-        })
-        .catch(() => {
-          this.$Progress.fail();
-        });
+      if (this.form.password == "") {
+        axios
+          .get("api/profile")
+          .then(({ data }) => {
+            this.form.password = data.password;
+          })
+          .then(() => {
+            this.form
+              .put("api/profile/")
+              .then(() => {
+                this.$Progress.finish();
+              })
+              .catch(() => {
+                this.$Progress.fail();
+              });
+          });
+      } else {
+        this.form
+          .put("api/profile/")
+          .then(() => {
+            this.$Progress.finish();
+          })
+          .catch(() => {
+            this.$Progress.fail();
+          });
+      }
     }
   }
 };
