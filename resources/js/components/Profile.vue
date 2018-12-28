@@ -22,7 +22,7 @@
             <h5 class="widget-user-desc">Web Designer</h5>
           </div>
           <div class="widget-user-image">
-            <img class="img-circle" src alt="User Avatar">
+            <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
           </div>
           <div class="card-footer">
             <div class="row">
@@ -315,8 +315,21 @@ export default {
     axios.get("api/profile").then(({ data }) => {
       this.form.fill(data);
     });
+    Fire.$on("AfterCreate", () => {
+      axios.get("api/profile").then(({ data }) => {
+        this.form.fill(data);
+      });
+    });
   },
   methods: {
+    getProfilePhoto() {
+      let photo =
+        this.form.photo.length > 100
+          ? this.form.photo
+          : "img/profile/" + this.form.photo;
+
+      return photo;
+    },
     updateProfile(e) {
       let file = e.target.files[0];
       let reader = new FileReader();
@@ -337,31 +350,17 @@ export default {
     updateInfo() {
       this.$Progress.start();
       if (this.form.password == "") {
-        axios
-          .get("api/profile")
-          .then(({ data }) => {
-            this.form.password = data.password;
-          })
-          .then(() => {
-            this.form
-              .put("api/profile/")
-              .then(() => {
-                this.$Progress.finish();
-              })
-              .catch(() => {
-                this.$Progress.fail();
-              });
-          });
-      } else {
-        this.form
-          .put("api/profile/")
-          .then(() => {
-            this.$Progress.finish();
-          })
-          .catch(() => {
-            this.$Progress.fail();
-          });
+        this.form.password = undefined;
       }
+      this.form
+        .put("api/profile/")
+        .then(() => {
+          Fire.$emit("AfterCreate");
+          this.$Progress.finish();
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        });
     }
   }
 };
