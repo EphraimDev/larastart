@@ -313,17 +313,30 @@ export default {
     updateProfile(e) {
       let file = e.target.files[0];
       let reader = new FileReader();
-      reader.onload = file => {
-        this.form.photo = reader.result;
-        console.log(this.form.photo);
-      };
-      reader.readAsDataURL(file);
+
+      if (file["size"] < 2111775) {
+        reader.onload = file => {
+          this.form.photo = reader.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        Swal({
+          type: "error",
+          title: "Oops...",
+          text: "You are uploading a large file"
+        });
+      }
     },
     updateInfo() {
+      this.$Progress.start();
       this.form
         .put("api/profile/")
-        .then()
-        .catch();
+        .then(() => {
+          this.$Progress.finish();
+        })
+        .catch(() => {
+          this.$Progress.fail();
+        });
     }
   }
 };

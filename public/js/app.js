@@ -2196,15 +2196,29 @@ __webpack_require__.r(__webpack_exports__);
       var file = e.target.files[0];
       var reader = new FileReader();
 
-      reader.onload = function (file) {
-        _this2.form.photo = reader.result;
-        console.log(_this2.form.photo);
-      };
+      if (file["size"] < 2111775) {
+        reader.onload = function (file) {
+          _this2.form.photo = reader.result;
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        Swal({
+          type: "error",
+          title: "Oops...",
+          text: "You are uploading a large file"
+        });
+      }
     },
     updateInfo: function updateInfo() {
-      this.form.put("api/profile/").then().catch();
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.put("api/profile/").then(function () {
+        _this3.$Progress.finish();
+      }).catch(function () {
+        _this3.$Progress.fail();
+      });
     }
   }
 });
