@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -86,6 +87,22 @@ class UserController extends Controller
     public function profile()
     {
         return auth('api')->user();
+    }
+
+    /**
+     * Update user profile.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request)
+    {
+        $user = auth('api')->user();
+        $photo = $request->photo;
+
+        $name = time() . '.' . explode('/', explode(':', substr($photo, 0, strpos($photo, ';')))[1])[1];
+        \Image::make($photo)->save(public_path('img/profile/') . $name);
+
     }
 
     /**

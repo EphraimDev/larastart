@@ -5,8 +5,8 @@
   height: 250px !important;
 }
 
-.profile-picture{
-    border: 0 !important;
+.profile-picture {
+  border: 0 !important;
 }
 </style>
 
@@ -243,7 +243,12 @@
                     <label for="inputProfilePhoto" class="col-sm-6 control-label">Profile Photo</label>
 
                     <div class="col-sm-10">
-                      <input type="file" class="form-control profile-picture" id="inputPhoto">
+                      <input
+                        type="file"
+                        @change="updateProfile"
+                        class="form-control profile-picture"
+                        id="inputPhoto"
+                      >
                     </div>
                   </div>
                   <div class="form-group">
@@ -263,7 +268,11 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-success">Update</button>
+                      <button
+                        @click.prevent="updateInfo"
+                        type="submit"
+                        class="btn btn-success"
+                      >Update</button>
                     </div>
                   </div>
                 </form>
@@ -299,6 +308,23 @@ export default {
     axios.get("api/profile").then(({ data }) => {
       this.form.fill(data);
     });
+  },
+  methods: {
+    updateProfile(e) {
+      let file = e.target.files[0];
+      let reader = new FileReader();
+      reader.onload = file => {
+        this.form.photo = reader.result;
+        console.log(this.form.photo);
+      };
+      reader.readAsDataURL(file);
+    },
+    updateInfo() {
+      this.form
+        .put("api/profile/")
+        .then()
+        .catch();
+    }
   }
 };
 </script>
