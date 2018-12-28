@@ -101,7 +101,7 @@
                   class="form-control"
                   :class="{ 'is-invalid': form.errors.has('bio') }"
                 >
-                <has-error :form="form" field="bro"></has-error>
+                <has-error :form="form" field="bio"></has-error>
               </div>
               <div class="form-group">
                 <select

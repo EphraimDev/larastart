@@ -216,7 +216,9 @@
                         class="form-control"
                         id="inputName"
                         placeholder="Name"
+                        :class="{ 'is-invalid': form.errors.has('name') }"
                       >
+                      <has-error :form="form" field="name"></has-error>
                     </div>
                   </div>
                   <div class="form-group">
@@ -229,7 +231,9 @@
                         class="form-control"
                         id="inputEmail"
                         placeholder="Email"
+                        :class="{ 'is-invalid': form.errors.has('email') }"
                       >
+                      <has-error :form="form" field="email"></has-error>
                     </div>
                   </div>
                   <div class="form-group">
@@ -255,15 +259,18 @@
                     <label
                       for="inputPassport"
                       class="col-sm-12 control-label"
-                    >Passport (leave empty if not changing)</label>
+                    >Password (leave empty if not changing)</label>
 
                     <div class="col-sm-10">
                       <input
-                        type="text"
+                        type="password"
                         class="form-control"
-                        id="inputPassport"
-                        placeholder="Passport"
+                        id="inputPassword"
+                        placeholder="Password"
+                        v-model="form.password"
+                        :class="{ 'is-invalid': form.errors.has('password') }"
                       >
+                      <has-error :form="form" field="password"></has-error>
                     </div>
                   </div>
                   <div class="form-group">
