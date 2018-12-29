@@ -79153,7 +79153,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   methods: {
     searchit: _.debounce(function () {
       Fire.$emit('searching');
-    }, 1000)
+    }, 1000),
+    printme: function printme() {
+      window.print();
+    }
   }
 });
 
