@@ -36,6 +36,7 @@ Vue.component(AlertError.name, AlertError)
 Vue.component('pagination', Pagination);
 
 import VueRouter from 'vue-router';
+//import HomeTemplate from '../views/home.blade.php';
 import DashboardTemplate from './components/Dashboard.vue';
 import ProfileTemplate from './components/Profile.vue';
 import UsersTemplate from './components/Users.vue';
@@ -62,10 +63,12 @@ Vue.use(VueProgressBar, options)
 
 
 let routes = [
+    { path: '/home', component: DashboardTemplate },
     { path: '/dashboard', component: DashboardTemplate },
     { path: '/developer', component: DeveloperTemplate },
     { path: '/users', component: UsersTemplate },
-    { path: '/profile', component: ProfileTemplate }
+    { path: '/profile', component: ProfileTemplate },
+    { path: '*', component: NotFoundTemplate }
 ]
 
 const router = new VueRouter({
