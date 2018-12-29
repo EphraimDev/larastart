@@ -190,7 +190,7 @@ class UserController extends Controller
                     ->orWhere('created_at', 'LIKE', "%$search%");
             })->paginate(20);
         } else {
-            $users = User::latest()->paginate(5);
+            $users = User::latest()->paginate(10);
         }
 
         return $users;
