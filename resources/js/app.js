@@ -12,6 +12,9 @@ import moment from 'moment';
 import VueProgressBar from 'vue-progressbar';
 import { Form, HasError, AlertError } from 'vform';
 
+import Gate from './Gate';
+Vue.prototype.$gate = new Gate(window.user);
+
 import swal from 'sweetalert2';
 
 window.Swal = swal;
