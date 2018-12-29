@@ -9,6 +9,7 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import moment from 'moment';
+import Pagination from 'laravel-vue-pagination';
 import VueProgressBar from 'vue-progressbar';
 import { Form, HasError, AlertError } from 'vform';
 
@@ -31,6 +32,8 @@ window.toast = toast
 window.Form = Form
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+
+Vue.component('pagination', Pagination);
 
 import VueRouter from 'vue-router';
 import DashboardTemplate from './components/Dashboard.vue';
