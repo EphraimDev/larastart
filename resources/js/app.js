@@ -37,6 +37,7 @@ import DashboardTemplate from './components/Dashboard.vue';
 import ProfileTemplate from './components/Profile.vue';
 import UsersTemplate from './components/Users.vue';
 import DeveloperTemplate from './components/Developer.vue';
+import NotFoundTemplate from './components/NotFound.vue';
 
 Vue.use(VueRouter)
 
@@ -81,17 +82,22 @@ window.Fire = new Vue();
 
 Vue.component(
     'passport-clients',
-    require('./components/passport/Clients.vue').default
+    require('./components/passport/Clients.vue')
 );
 
 Vue.component(
     'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue').default
+    require('./components/passport/AuthorizedClients.vue')
 );
 
 Vue.component(
     'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+Vue.component(
+    'not-found',
+    NotFoundTemplate
 );
 
 /**

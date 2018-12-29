@@ -51,6 +51,11 @@
       </div>
     </div>
 
+    <div v-if="!$gate.isAdmin()">
+      <not-found></not-found>
+    </div>
+
+    <!-- Modal -->
     <div
       class="modal fade"
       id="addNew"
@@ -213,7 +218,7 @@ export default {
       });
     },
     loadUsers() {
-      if (this.$gate.isAdmin) {
+      if (this.$gate.isAdmin()) {
         axios.get("api/user").then(({ data }) => (this.users = data.data));
       }
     },
