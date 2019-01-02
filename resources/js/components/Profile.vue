@@ -314,7 +314,7 @@ export default {
   created() {
     axios.get("api/profile").then(({ data }) => {
       this.form.fill(data);
-    });
+    }).catch(err=> console.log(err));
     Fire.$on("AfterCreate", () => {
       axios.get("api/profile").then(({ data }) => {
         this.form.fill(data);

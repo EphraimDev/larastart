@@ -2707,6 +2707,8 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref.data;
 
       _this.form.fill(data);
+    }).catch(function (err) {
+      return console.log(err);
     });
     Fire.$on("AfterCreate", function () {
       axios.get("api/profile").then(function (_ref2) {
