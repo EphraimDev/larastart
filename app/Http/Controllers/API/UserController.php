@@ -90,7 +90,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        return auth('api')->user();
+        return user();
     }
 
     /**
