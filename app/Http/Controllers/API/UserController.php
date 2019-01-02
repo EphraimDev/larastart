@@ -91,7 +91,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        return user();
+        return Auth::user();
     }
 
     /**
