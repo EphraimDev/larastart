@@ -103,6 +103,8 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $user = auth('api')->user();
+        $request->headers->set('Access-Control-Allow-Origin', '*');
+        $request->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
         $this->validate($request, [
             'name' => 'required|string|max:191',
