@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -90,7 +91,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        return user();
+        return Auth::user();
     }
 
     /**
