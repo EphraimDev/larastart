@@ -102,39 +102,35 @@ class UserController extends Controller
      */
     public function updateProfile(Request $request)
     {
-        //$user = auth('api')->user();
+        $user = auth('api')->user();
 
-        return Auth::user();
-        // $request->headers->set('Access-Control-Allow-Origin', '*');
-        // $request->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
+            'password' => 'sometimes|required|min:6'
+        ]);
 
-        // $this->validate($request, [
-        //     'name' => 'required|string|max:191',
-        //     'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
-        //     'password' => 'sometimes|required|min:6'
-        // ]);
+        $photo = $request->photo;
+        $currentPhoto = $user->photo;
 
-        // $photo = $request->photo;
-        // $currentPhoto = $user->photo;
-
-        // if ($photo != $currentPhoto) {
-        //     $name = time() . '.' . explode('/', explode(':', substr($photo, 0, strpos($photo, ';')))[1])[1];
-        //     \Image::make($photo)->save(public_path('img/profile/') . $name);
-        //     $request->merge(['photo' => $name]);
+        if ($photo != $currentPhoto) {
+            $name = time() . '.' . explode('/', explode(':', substr($photo, 0, strpos($photo, ';')))[1])[1];
+            \Image::make($photo)->save(public_path('img/profile/') . $name);
+            $request->merge(['photo' => $name]);
 
 
-        //     $userPhoto = public_path('img/profile/') . $currentPhoto;
-        //     if (file_exists($userPhoto)) {
-        //         @unlink($userPhoto);
-        //     }
-        // }
+            $userPhoto = public_path('img/profile/') . $currentPhoto;
+            if (file_exists($userPhoto)) {
+                @unlink($userPhoto);
+            }
+        }
 
-        // if (!empty($request->password)) {
-        //     $request->merge(['password' => Hash::make($request['password'])]);
-        // }
+        if (!empty($request->password)) {
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
 
-        // $user->update($request->all());
-        // return ['message' => 'Successful'];
+        $user->update($request->all());
+        return ['message' => 'Successful'];
     }
 
     /**
