@@ -102,9 +102,9 @@ class UserController extends Controller
      */
     public function updateProfile(Request $request)
     {
-        $user = auth('api')->user();
+        //$user = auth('api')->user();
 
-        return $user;
+        return Auth::user();
         // $request->headers->set('Access-Control-Allow-Origin', '*');
         // $request->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
