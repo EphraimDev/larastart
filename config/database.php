@@ -40,14 +40,15 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST'),
-            'port' => env('DB_PORT'),
-            'database' => env('DB_DATABASE'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'host' => 'db4free.net',
+            'port' => 3306,
+            'database' => 'larastart_2018',
+            'username' => 'ephraimdev',
+            'password' => 'Ephaig14@',
+            'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -55,6 +56,22 @@ return [
             'strict' => true,
             'engine' => null,
         ],
+
+        // 'mysql' => [
+        //     'driver' => 'mysql',
+        //     'host' => env('DB_HOST', 'db4free.net'),
+        //     'port' => env('DB_PORT', 3306),
+        //     'database' => env('DB_DATABASE', 'larastart_2018'),
+        //     'username' => env('DB_USERNAME', 'ephraimdev'),
+        //     'password' => env('DB_PASSWORD', 'Ephaig14@'),
+        //     'unix_socket' => env('DB_SOCKET', ''),
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'prefix_indexes' => true,
+        //     'strict' => true,
+        //     'engine' => null,
+        // ],
 
         'pgsql' => [
             'driver' => 'pgsql',
